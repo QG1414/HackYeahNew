@@ -12,5 +12,23 @@ namespace SteelLotus.Core.Events
             if (OnGameStart != null)
                 OnGameStart();
         }
+
+        public event Action OnGameEnd;
+
+        public void CallOnGameEnd()
+        {
+            if (OnGameEnd != null)
+                OnGameEnd();
+        }
+
+        public event Action OnSecondUpdate;
+
+        public void CallOnSecondUpdate()
+        {
+            if(OnSecondUpdate != null)
+            {
+                OnSecondUpdate();
+            }
+        }
     }
 }

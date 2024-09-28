@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using SteelLotus.Sounds;
 using UnityEngine.SceneManagement;
+using UnityEditor.Build;
 
 namespace SteelLotus.Core
 {
@@ -23,6 +24,23 @@ namespace SteelLotus.Core
         [BoxGroup("UI"), SerializeField]
         private Canvas canvas;
 
+        [BoxGroup("UI"), SerializeField]
+        private SwitchScenes switchScenes;
+
+        [BoxGroup("Minigame"), SerializeField]
+        private MinigameController minigameController;
+
+        [BoxGroup("UI"), SerializeField]
+        private CanvasGroup interactionsBlocker;
+
+        public bool GameStarted { get; set; }
+
+
+        [ContextMenu("start game")]
+        public void startGame()
+        {
+            GameStarted = true;
+        }
 
         private void Awake()
         {
@@ -66,6 +84,12 @@ namespace SteelLotus.Core
             }
 
             return null;
+        }
+
+
+        public void BlockUnlockInteractions(bool value)
+        {
+            interactionsBlocker.blocksRaycasts = value;
         }
     }
 }

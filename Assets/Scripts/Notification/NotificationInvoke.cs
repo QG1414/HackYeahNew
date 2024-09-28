@@ -23,7 +23,17 @@ public class NotificationInvoke : MonoBehaviour
 
         notificationController.Dialogue(order, elementNotification);
 
-        //block interactions
+        MainGameController.Instance.BlockUnlockInteractions(true);
+    }
+
+    public void StartMonolog()
+    {
+        if (notificationController == null)
+            notificationController = MainGameController.Instance.GetPropertyByType<NotificationController>();
+
+        notificationController.Dialogue(order);
+
+        MainGameController.Instance.BlockUnlockInteractions(true);
     }
 
 

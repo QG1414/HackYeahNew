@@ -11,29 +11,44 @@ using UnityEngine.UI;
 public class InteractionObject : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler
 {
     [SerializeField]
-    private RectTransform objectTransform;
+    protected RectTransform objectTransform;
     [SerializeField]
-    private Image image;
+    protected Image image;
+    [SerializeField]
+    protected ToolType toolType;
 
     [SerializeField]
-    private UnityEvent onClick;
+    protected UnityEvent onClick;
 
     [SerializeField]
-    private UnityEvent onDrop;
+    protected UnityEvent onDrop;
 
-    public void OnDrop(PointerEventData eventData)
+    [SerializeField]
+    protected UnityEvent onWrongToolDrop;
+
+    public virtual void OnDrop(PointerEventData eventData)
     {
+
         if(eventData.pointerDrag != null)
         {
-            if(onDrop != null)
-                onDrop.Invoke();
+            ToolInteractions tool = eventData.pointerDrag.GetComponent<ToolInteractions>();
 
-            PlayerEvents.Instance.CallOnDrop();
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = objectTransform.anchoredPosition;
+            if(tool != null && tool.ToolType == toolType)
+            {
+                if (onDrop != null)
+                    onDrop.Invoke();
+
+                PlayerEvents.Instance.CallOnDrop();
+            }
+            else if(tool != null)
+            {
+                if (onWrongToolDrop != null)
+                    onWrongToolDrop.Invoke();
+            }
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         if(onClick != null)
         {
@@ -41,12 +56,12 @@ public class InteractionObject : MonoBehaviour, IPointerDownHandler, IPointerEnt
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         image.color = image.color * 1.2f;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         image.color = image.color / 1.2f;
     }

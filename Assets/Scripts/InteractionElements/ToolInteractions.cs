@@ -18,6 +18,8 @@ public class ToolInteractions : MonoBehaviour, IPointerDownHandler, IPointerEnte
     private CanvasGroup canvasGroup;
     [SerializeField]
     private Image image;
+    [SerializeField]
+    private ToolType toolType;
 
     [SerializeField]
     private UnityEvent onClick;
@@ -25,7 +27,8 @@ public class ToolInteractions : MonoBehaviour, IPointerDownHandler, IPointerEnte
     private Vector3 startPosition = Vector3.zero;
 
     private bool inReplacement = false;
-    private bool returnToSlot;
+
+    public ToolType ToolType { get => toolType; }
 
     private void Awake()
     {
@@ -39,28 +42,13 @@ public class ToolInteractions : MonoBehaviour, IPointerDownHandler, IPointerEnte
 
         if (image == null)
             image = GetComponentInChildren<Image>();
-
-        PlayerEvents.Instance.OnDrop += ElementDroped;
     }
 
-    private void OnDestroy()
-    {
-        PlayerEvents.Instance.OnDrop -= ElementDroped;
-    }
-
-    private void ElementDroped()
-    {
-        if(inReplacement)
-        {
-            returnToSlot = false;
-        }
-    }
 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         startPosition = rectTransform.anchoredPosition;
-        returnToSlot = true;
         inReplacement = true;
         canvasGroup.blocksRaycasts = false;
     }
@@ -72,11 +60,7 @@ public class ToolInteractions : MonoBehaviour, IPointerDownHandler, IPointerEnte
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
-        if(returnToSlot)
-        {
-            rectTransform.anchoredPosition = startPosition;
-        }
+        rectTransform.anchoredPosition = startPosition;
         inReplacement = false;
         canvasGroup.blocksRaycasts = true;
     }
@@ -96,4 +80,11 @@ public class ToolInteractions : MonoBehaviour, IPointerDownHandler, IPointerEnte
         if(onClick != null)
             onClick.Invoke();
     }
+}
+
+public enum ToolType
+{
+    Potentiometer,
+    Korb,
+    Pendrive
 }

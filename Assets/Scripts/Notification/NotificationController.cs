@@ -1,3 +1,4 @@
+using SteelLotus.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,6 +106,7 @@ public class NotificationController : MonoBehaviour
 
         otherNotification.StopDialogue();
         mainNotification.StopDialogue();
+        MainGameController.Instance.BlockUnlockInteractions(false);
     }
 
 
@@ -134,17 +136,22 @@ public class NotificationController : MonoBehaviour
 
                 if (skiped)
                 {
+                    yield return new WaitForSeconds(0.2f);
+
                     while (!Input.anyKeyDown)
                     {
                         yield return null;
                     }
                 }
+
+                yield return new WaitForSeconds(0.2f);
             }
 
             elementIndexMain += 1;
         }
 
         mainNotification.StopDialogue();
+        MainGameController.Instance.BlockUnlockInteractions(false);
     }
 
 }
