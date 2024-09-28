@@ -36,7 +36,7 @@ public class HackingEventsInvoke : MonoBehaviour
     private void UpdateMethod()
     {
         int value = Mathf.FloorToInt(Random.Range(eventTimer.x, eventTimer.y));
-        if (currentTime >= value && !minigameController.GeneratorMinigameActive())
+        if (currentTime >= value && !minigameController.GeneratorMinigameActive() && !MainGameController.Instance.GeneratorCritical)
         {
             currentTime = 0;
             StartRandomEvent();

@@ -4,10 +4,11 @@ using UnityEngine;
 using NaughtyAttributes;
 using System;
 using UnityEngine.Audio;
+using SteelLotus.Core.SaveLoadSystem;
 
 namespace SteelLotus.Sounds
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : Singleton<SoundManager>
     {
 
         #region Inspector Variables
@@ -92,13 +93,23 @@ namespace SteelLotus.Sounds
 
         #endregion Properties
 
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            DontDestroyOnLoad(this.gameObject);
+        }
+
 
         #region Play Sounds
 
         public void PlayClip(AudioSource source, AudioClip clip, bool loop, float delay = 0)
         {
             source.loop = loop;
-            StartCoroutine(DoubleFade(source, clip, 0, 2f, delay));
+            StartCoroutine(DoubleFade(source, clip, 0, 0.5f, delay));
         }
 
         public void PlayClips(AudioSource source, List<AudioClip> clips, bool loop, float delay = 0)
@@ -261,6 +272,7 @@ namespace SteelLotus.Sounds
                 yield return null;
             }
             source.Stop();
+            source.volume = 1f;
         }
         
 

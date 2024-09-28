@@ -13,10 +13,11 @@ public class TimeVisualization : MonoBehaviour
     TimeController timeController;
 
 
-    private void Awake()
+    private void Start()
     {
         timeController = MainGameController.Instance.GetPropertyByType<TimeController>();
         GameEvents.Instance.OnSecondUpdate += SecondUpdate;
+        timerPanel.text = (timeController.CurrentTime).ToString();
     }
 
     private void OnDestroy()

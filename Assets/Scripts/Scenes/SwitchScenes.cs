@@ -1,3 +1,5 @@
+using SteelLotus.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,25 +15,25 @@ public class SwitchScenes : MonoBehaviour
     [SerializeField]
     private Vector2 positionChange;
 
+    [SerializeField]
     private Vector2 startPosition;
 
-    private void Awake()
+    public void MoveToCenter()
     {
-        startPosition = screenBlocker.anchoredPosition;
+        screenBlocker.anchoredPosition = startPosition - positionChange;
     }
 
-
     [ContextMenu("start effect")]
-    public float StartMovement()
+    public float StartMovement(Action actionToPerforem = null)
     {
-        StartCoroutine(Loading(true));
+        AdditionalFunctions.Instance.ObjectMovement(true, screenBlocker, positionChange,startPosition,movementDuration, actionToPerforem);
         return movementDuration;
     }
 
     [ContextMenu("stop effect")]
-    public float StopMovement()
+    public float StopMovement(Action actionToPerforem = null)
     {
-        StartCoroutine(Loading(false));
+        AdditionalFunctions.Instance.ObjectMovement(false, screenBlocker, positionChange, startPosition, movementDuration, actionToPerforem);
         return movementDuration;
     }
 

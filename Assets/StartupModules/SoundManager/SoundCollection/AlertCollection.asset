@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: AlertCollection
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 4246bc8e7953dcc4b84e53ae5ca70472, type: 2}
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: aaba7968c6721944094231e209db67ff, type: 3}
+  - {fileID: 8300000, guid: d3472caedd0644341856698f4d8a6313, type: 3}

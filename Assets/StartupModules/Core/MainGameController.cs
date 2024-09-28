@@ -6,6 +6,7 @@ using System.Reflection;
 using SteelLotus.Sounds;
 using UnityEngine.SceneManagement;
 using UnityEditor.Build;
+using System.Collections;
 
 namespace SteelLotus.Core
 {
@@ -14,9 +15,6 @@ namespace SteelLotus.Core
 
         [BoxGroup("Core"),SerializeField]
         private DataManager dataManager;
-
-        [BoxGroup("Core"), SerializeField]
-        private SoundManager soundManager;
 
         [BoxGroup("Notification"), SerializeField]
         private NotificationController notificationController;
@@ -41,7 +39,7 @@ namespace SteelLotus.Core
 
         public bool GameStarted { get; set; }
 
-
+        public bool GeneratorCritical { get; set; }
 
         private void Awake()
         {
@@ -54,7 +52,7 @@ namespace SteelLotus.Core
             dataManager.Init();
             SaveSystem.Init();
 
-            GameStarted = true;
+            switchScenes.StopMovement(() => GameStarted = true);
         }
 
         public T GetPropertyByType<T>() where T : class

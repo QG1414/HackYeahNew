@@ -1,5 +1,6 @@
 using SteelLotus.Core;
 using SteelLotus.Core.Events;
+using SteelLotus.Sounds;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,11 +34,11 @@ public class HackingNotification : MonoBehaviour
 
     public void StartEffect(HackingEvent _)
     {
-        Debug.LogError("start effect");
         warningSign.color = new Color(1, 1, 1, 1);
         warningSign.gameObject.SetActive(true);
         timeVisualization.DisableText();
         effectCoroutine = StartCoroutine(EffectActive());
+        SoundManager.Instance.PlayClip(SoundManager.Instance.AlertSource, SoundManager.Instance.AlertCollection.clips[0], true);
     }
 
     public void StopEffect(bool _)
@@ -50,6 +51,7 @@ public class HackingNotification : MonoBehaviour
 
         warningSign.gameObject.SetActive(false);
         timeVisualization.EnableText();
+        SoundManager.Instance.StopAudio(SoundManager.Instance.AlertSource);
     }
 
     private IEnumerator EffectActive()

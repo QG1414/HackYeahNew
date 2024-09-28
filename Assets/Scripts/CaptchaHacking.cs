@@ -81,8 +81,6 @@ public class CaptchaHacking : HackingEvent
 
     public void CheckSelectedCaptcha(int number)
     {
-        
-        Debug.LogError($"{correctElementNumber} | {number}");
 
         currentSolved -= 1;
 

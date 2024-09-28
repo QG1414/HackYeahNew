@@ -1,5 +1,6 @@
 using SteelLotus.Core;
 using SteelLotus.Core.Events;
+using SteelLotus.Sounds;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -24,6 +25,8 @@ public class Generator : InteractionObject, IMinigame
     public MinigameType MinigameType { get => minigameType; set => minigameType = value; }
 
     private MinigameController minigameController;
+
+    private bool warningActive = false;
 
     public override void OnDrop(PointerEventData eventData)
     {
@@ -81,12 +84,24 @@ public class Generator : InteractionObject, IMinigame
 
         UpdateVisuals();
 
-
+        if(currentWorkTime / maxWorkTime < 0.2f && !warningActive)
+        {
+            MainGameController.Instance.GeneratorCritical = true;
+            warningActive = true;
+            SoundManager.Instance.PlayClip(SoundManager.Instance.AlertSource, SoundManager.Instance.AlertCollection.clips[0], true);
+        }
+        else if(currentWorkTime / maxWorkTime >= 0.2f && warningActive)
+        {
+            MainGameController.Instance.GeneratorCritical = false;
+            warningActive = false;
+            SoundManager.Instance.StopAudio(SoundManager.Instance.AlertSource);
+        }
 
         if (currentWorkTime <= 0)
         {
             MainGameController.Instance.DecreaseHealth();
             currentWorkTime = maxWorkTime;
+            MainGameController.Instance.GeneratorCritical = false;
         }
     }
 
