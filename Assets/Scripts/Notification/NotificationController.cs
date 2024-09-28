@@ -18,12 +18,8 @@ public class NotificationController : MonoBehaviour
     }
 
 
-
-
     private IEnumerator MoveInDialogoue(DialogueOrder order, Notification otherNotification)
     {
-        Debug.LogError("move 1");
-
         int elementIndexMain = 0;
         int elementIndexOther = 0;
 
@@ -31,12 +27,10 @@ public class NotificationController : MonoBehaviour
 
         foreach(NotificationData notification in notificationElements)
         {
-            Debug.LogError("move 2");
 
             if (notification.TalkingOptions is TalkingOptions.Main)
             {
 
-                Debug.LogError("move 3");
                 elementIndexOther = 0;
                 if (elementIndexMain == 0)
                 {
@@ -46,7 +40,6 @@ public class NotificationController : MonoBehaviour
 
                 foreach(string text in notification.Dialogue)
                 {
-                    Debug.LogError($"move 4: {text}");
 
                     mainNotification.ChangeText(text);
 

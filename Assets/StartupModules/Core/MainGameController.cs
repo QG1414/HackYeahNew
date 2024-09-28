@@ -20,6 +20,9 @@ namespace SteelLotus.Core
         [BoxGroup("Notification"), SerializeField]
         private NotificationController notificationController;
 
+        [BoxGroup("UI"), SerializeField]
+        private Canvas canvas;
+
 
         private void Awake()
         {

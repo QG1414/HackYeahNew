@@ -12,5 +12,16 @@ namespace SteelLotus.Core.Events
                 OnPlayerDeath(deathType);
         }
 
+
+        public event Action OnDrop;
+
+        public void CallOnDrop()
+        {
+            if(OnDrop != null)
+            {
+                OnDrop();
+            }
+        }
+
     }
 }
