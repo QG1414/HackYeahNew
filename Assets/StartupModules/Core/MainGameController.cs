@@ -68,5 +68,10 @@ namespace SteelLotus.Core
 
             return null;
         }
+
+        public void test()
+        {
+            Debug.LogError("test");
+        }
     }
 }
