@@ -17,6 +17,9 @@ namespace SteelLotus.Core
         [BoxGroup("Core"), SerializeField]
         private SoundManager soundManager;
 
+        [BoxGroup("Notification"), SerializeField]
+        private NotificationController notificationController;
+
 
         private void Awake()
         {
