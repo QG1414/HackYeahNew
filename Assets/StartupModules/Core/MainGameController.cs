@@ -30,13 +30,6 @@ namespace SteelLotus.Core
             SaveSystem.Init();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                SceneManager.LoadScene(1);
-            }
-        }
         public T GetPropertyByType<T>() where T : class
         {
             Type myType = this.GetType();
@@ -67,11 +60,6 @@ namespace SteelLotus.Core
             }
 
             return null;
-        }
-
-        public void test()
-        {
-            Debug.LogError("test");
         }
     }
 }
