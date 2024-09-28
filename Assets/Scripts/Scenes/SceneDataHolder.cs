@@ -9,17 +9,12 @@ public class SceneDataHolder
     [SerializeField]
     private CanvasGroup objectsToEnable;
 
-    [SerializeField]
-    private Sprite backgroundSprite;
 
-
-    public Sprite EnableScene()
+    public void EnableScene()
     {
         objectsToEnable.alpha = 1f;
         objectsToEnable.interactable = true;
         objectsToEnable.blocksRaycasts = true;
-
-        return backgroundSprite;
     }
 
     public void DisableScene()

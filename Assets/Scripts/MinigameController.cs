@@ -53,6 +53,11 @@ public class MinigameController : MonoBehaviour
         currentMinigame = null;
 
     }
+
+    public bool GeneratorMinigameActive()
+    {
+        return currentMinigame != null;
+    }
 }
 
 [Serializable]

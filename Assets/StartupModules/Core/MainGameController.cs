@@ -36,14 +36,12 @@ namespace SteelLotus.Core
         [SerializeField]
         private HealthController healthController;
 
+        [SerializeField]
+        private TimeController timeController;
+
         public bool GameStarted { get; set; }
 
 
-        [ContextMenu("start game")]
-        public void startGame()
-        {
-            GameStarted = true;
-        }
 
         private void Awake()
         {
@@ -55,6 +53,8 @@ namespace SteelLotus.Core
             DontDestroyOnLoad(this.gameObject);
             dataManager.Init();
             SaveSystem.Init();
+
+            GameStarted = true;
         }
 
         public T GetPropertyByType<T>() where T : class

@@ -14,6 +14,11 @@ public class InteractionObject : MonoBehaviour, IPointerDownHandler, IPointerEnt
     protected RectTransform objectTransform;
     [SerializeField]
     protected Image image;
+
+    [SerializeField]
+    protected Sprite baseSprite;
+    [SerializeField]
+    protected Sprite interactSprite;
     [SerializeField]
     protected ToolType toolType;
 
@@ -58,11 +63,11 @@ public class InteractionObject : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        image.color = image.color * 1.2f;
+        image.sprite = interactSprite;
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        image.color = image.color / 1.2f;
+        image.sprite = baseSprite;
     }
 }

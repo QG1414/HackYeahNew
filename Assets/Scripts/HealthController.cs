@@ -7,22 +7,32 @@ using UnityEngine.UI;
 public class HealthController : MonoBehaviour
 {
     [SerializeField]
-    private List<Sprite> spritesLevels = new List<Sprite>();
+    private List<Image> spritesLevels = new List<Image>();
 
     [SerializeField]
-    private Image healthSprite;
+    private Sprite healthSprite;
+
+    [SerializeField]
+    private Sprite damagedSprite;
+
+
 
     private int numberOfLives;
 
     private void Awake()
     {
-        numberOfLives = spritesLevels.Count - 1;
+        numberOfLives = spritesLevels.Count;
+
+        foreach(Image image in spritesLevels)
+        {
+            image.sprite = healthSprite;
+        }
     }
 
     public void UpdateHealth()
     {
         numberOfLives -= 1;
-        healthSprite.sprite = spritesLevels[spritesLevels.Count - 1 - numberOfLives];
+        spritesLevels[numberOfLives].sprite = damagedSprite;
 
         if (numberOfLives <= 0)
         {

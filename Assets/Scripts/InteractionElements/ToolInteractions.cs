@@ -85,6 +85,6 @@ public class ToolInteractions : MonoBehaviour, IPointerDownHandler, IPointerEnte
 public enum ToolType
 {
     Potentiometer,
-    Korb,
+    Button,
     Pendrive
 }

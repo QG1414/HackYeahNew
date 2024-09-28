@@ -56,7 +56,7 @@ public class Generator : InteractionObject, IMinigame
         if (value)
         {
             currentWorkTime = maxWorkTime;
-            generatorFillImage.fillAmount = currentWorkTime / maxWorkTime;
+            UpdateVisuals();
         }
     }
 
@@ -64,7 +64,7 @@ public class Generator : InteractionObject, IMinigame
     {
         currentWorkTime = maxWorkTime;
 
-        generatorFillImage.fillAmount = currentWorkTime / maxWorkTime;
+        UpdateVisuals();
 
         GameEvents.Instance.OnSecondUpdate += UpdateMethod;
     }
@@ -79,13 +79,23 @@ public class Generator : InteractionObject, IMinigame
     {
         currentWorkTime -= 1f;
 
-        generatorFillImage.fillAmount = currentWorkTime / maxWorkTime;
+        UpdateVisuals();
+
+
 
         if (currentWorkTime <= 0)
         {
             MainGameController.Instance.DecreaseHealth();
             currentWorkTime = maxWorkTime;
         }
+    }
+
+    private void UpdateVisuals()
+    {
+        generatorFillImage.fillAmount = currentWorkTime / maxWorkTime;
+        generatorFillImage.color = new Color(1, generatorFillImage.fillAmount, generatorFillImage.fillAmount, 1);
+
+        GameEvents.Instance.CallOnGeneratorChange(currentWorkTime, maxWorkTime);
     }
 
 }

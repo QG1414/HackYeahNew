@@ -40,5 +40,35 @@ namespace SteelLotus.Core.Events
                 OnGameOver();
             }
         }
+
+        public event Action<HackingEvent> OnEventStarted;
+        public void CallOnEventStarted(HackingEvent hackingEvent)
+        {
+            if (OnEventStarted != null)
+            {
+                OnEventStarted(hackingEvent);
+            }
+        }
+
+
+        public event Action<bool> OnEventStopped;
+
+        public void CallOnEventStopped(bool win)
+        {
+            if (OnEventStopped != null)
+            {
+                OnEventStopped(win);
+            }
+        }
+
+        public event Action<float,float> OnGeneratorChange;
+
+        public void CallOnGeneratorChange(float generatorValueCurrent, float generatorValueMax)
+        {
+            if (OnGeneratorChange != null)
+            {
+                OnGeneratorChange(generatorValueCurrent, generatorValueMax);
+            }
+        }
     }
 }

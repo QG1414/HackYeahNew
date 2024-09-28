@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class ScenesManager : MonoBehaviour
 {
     [SerializeField]
-    private Image backgroundImage;
-
-    [SerializeField]
     private List<SceneDataHolder> sceneDataHolders = new List<SceneDataHolder>();
 
     [SerializeField]
@@ -18,12 +15,17 @@ public class ScenesManager : MonoBehaviour
 
     private SceneDataHolder lastScene = null;
 
+    private void Awake()
+    {
+        lastScene = sceneDataHolders[sceneIndex];
+    }
+
     public void LoadNextScene()
     {
         sceneIndex += 1;
 
         if (sceneIndex >= sceneDataHolders.Count)
-            return;
+            sceneIndex = 0;
 
         StartCoroutine(Loading());
         
@@ -37,7 +39,7 @@ public class ScenesManager : MonoBehaviour
 
         lastScene = sceneDataHolders[sceneIndex];
 
-        backgroundImage.sprite = lastScene.EnableScene();
+        lastScene.EnableScene();
 
         yield return new WaitForSeconds(switchScenes.StopMovement());
     }

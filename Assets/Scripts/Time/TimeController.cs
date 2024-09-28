@@ -11,6 +11,9 @@ public class TimeController : MonoBehaviour
 
     private float currentTime;
 
+    public int MaxTime { get => maxTime; }
+    public float CurrentTime { get => currentTime; }
+
 
     private void Awake()
     {
