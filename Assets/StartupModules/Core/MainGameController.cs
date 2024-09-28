@@ -33,6 +33,9 @@ namespace SteelLotus.Core
         [BoxGroup("UI"), SerializeField]
         private CanvasGroup interactionsBlocker;
 
+        [SerializeField]
+        private HealthController healthController;
+
         public bool GameStarted { get; set; }
 
 
@@ -84,6 +87,11 @@ namespace SteelLotus.Core
             }
 
             return null;
+        }
+
+        public void DecreaseHealth()
+        {
+            healthController.UpdateHealth();
         }
 
 

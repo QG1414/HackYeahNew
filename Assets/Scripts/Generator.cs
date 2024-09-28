@@ -83,7 +83,8 @@ public class Generator : InteractionObject, IMinigame
 
         if (currentWorkTime <= 0)
         {
-            //Change health
+            MainGameController.Instance.DecreaseHealth();
+            currentWorkTime = maxWorkTime;
         }
     }
 

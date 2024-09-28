@@ -30,5 +30,15 @@ namespace SteelLotus.Core.Events
                 OnSecondUpdate();
             }
         }
+
+        public event Action OnGameOver;
+
+        public void CallOnGameOver()
+        {
+            if (OnGameOver != null)
+            {
+                OnGameOver();
+            }
+        }
     }
 }
