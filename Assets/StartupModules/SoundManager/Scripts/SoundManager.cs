@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using System;
 using UnityEngine.Audio;
 using SteelLotus.Core.SaveLoadSystem;
+using static Unity.VisualScripting.Member;
 
 namespace SteelLotus.Sounds
 {
@@ -239,21 +240,22 @@ namespace SteelLotus.Sounds
             float start = source.volume;
 
             float currentTime = 0;
-            while (currentTime < duration)
+            while (source.volume > 0)
             {
                 currentTime += Time.unscaledDeltaTime;
-                source.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+                source.volume = Mathf.Lerp(start, 0, currentTime / duration);
                 yield return null;
             }
+
 
             source.clip = clip;
             source.Play();
 
             currentTime = 0;
-            while (currentTime < duration)
+            while (source.volume < 1)
             {
                 currentTime += Time.unscaledDeltaTime;
-                source.volume = Mathf.Lerp(targetVolume, start, currentTime / duration);
+                source.volume = Mathf.Lerp(targetVolume, 1, currentTime / duration);
                 yield return null;
             }
         }
@@ -265,10 +267,10 @@ namespace SteelLotus.Sounds
             float start = source.volume;
             float currentTime = 0;
 
-            while(currentTime < duration)
+            while(source.volume > 0)
             {
                 currentTime += Time.unscaledDeltaTime;
-                source.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+                source.volume = Mathf.Lerp(start, 0, currentTime / duration);
                 yield return null;
             }
             source.Stop();

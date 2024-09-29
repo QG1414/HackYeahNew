@@ -4,6 +4,7 @@ using SteelLotus.Sounds;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HackingEventsInvoke : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class HackingEventsInvoke : MonoBehaviour
 
     private HackingEvent currentEvent;
     private MinigameController minigameController;
+    private ScenesManager sceneManager;
 
     int currentTime = 0;
 
@@ -23,6 +25,8 @@ public class HackingEventsInvoke : MonoBehaviour
     {
         if (minigameController == null)
             minigameController = MainGameController.Instance.GetPropertyByType<MinigameController>();
+
+        sceneManager = MainGameController.Instance.GetPropertyByType<ScenesManager>();
 
         GameEvents.Instance.OnEventStopped += EvenStopped;
         GameEvents.Instance.OnSecondUpdate += UpdateMethod;
@@ -52,7 +56,18 @@ public class HackingEventsInvoke : MonoBehaviour
         this.currentEvent = currentEvent;
         MainGameController.Instance.GameStarted = false;
         currentEvent.StartEvent();
+
+        if(sceneManager.SceneIndex == 1)
+        {
+            sceneManager.StartAnimationText();
+        }
+
         GameEvents.Instance.CallOnEventStarted(currentEvent);
+    }
+
+    public bool eventStarted()
+    {
+        return this.currentEvent != null;
     }
 
     private void EvenStopped(bool win)

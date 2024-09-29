@@ -40,6 +40,12 @@ namespace SteelLotus.Core
         [SerializeField]
         private TutorialScript tutorials;
 
+        [SerializeField]
+        private HackingEventsInvoke hackingEvents;
+
+        [SerializeField]
+        private ScenesManager sceneMenager;
+
 
         private float generatorMultiplaier = 1f;
 

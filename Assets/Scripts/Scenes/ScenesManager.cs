@@ -1,3 +1,4 @@
+using SteelLotus.Core;
 using SteelLotus.Sounds;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,13 +17,23 @@ public class ScenesManager : MonoBehaviour
     [SerializeField, NaughtyAttributes.Scene]
     private string mainMenuScene;
 
+    [SerializeField, NaughtyAttributes.Scene]
+    private string gameScene;
+
+    [SerializeField]
+    private AnimatedText animatedText;
+
     private int sceneIndex = 0;
 
     private SceneDataHolder lastScene = null;
+    private HackingEventsInvoke hackingEvents;
+
+    public int SceneIndex { get => sceneIndex; }
 
     private void Awake()
     {
         lastScene = sceneDataHolders[sceneIndex];
+        hackingEvents = MainGameController.Instance.GetPropertyByType<HackingEventsInvoke>();
     }
 
     public void ReturnToMainMenu()
@@ -33,15 +44,46 @@ public class ScenesManager : MonoBehaviour
         switchScenes.StartMovement(() => SceneManager.LoadScene(mainMenuScene));
     }
 
+    public void ReturnToMainMenuInstant()
+    {
+        SoundManager.Instance.StopAudio(SoundManager.Instance.AlertSource, false);
+        SoundManager.Instance.StopAudio(SoundManager.Instance.AmbientSource, false);
+        SoundManager.Instance.StopAudio(SoundManager.Instance.MusicSource, false);
+        SceneManager.LoadScene(mainMenuScene);
+    }
+
+    public void Restart()
+    {
+        SoundManager.Instance.StopAudio(SoundManager.Instance.AlertSource, false);
+        SoundManager.Instance.StopAudio(SoundManager.Instance.AmbientSource, false);
+        SoundManager.Instance.StopAudio(SoundManager.Instance.MusicSource, false);
+        SoundManager.Instance.PlayClip(SoundManager.Instance.MusicSource, SoundManager.Instance.MusicCollection.clips[1], true);
+        SceneManager.LoadScene(gameScene);
+    }
+
     public void LoadNextScene()
     {
         sceneIndex += 1;
 
         if (sceneIndex >= sceneDataHolders.Count)
+        {
             sceneIndex = 0;
+        }
+        else
+        {
+            if (hackingEvents.eventStarted())
+            {
+                StartAnimationText();
+            }
+        }
 
         StartCoroutine(Loading());
         
+    }
+
+    public void StartAnimationText()
+    {
+        animatedText.StartAnimation();
     }
 
     private IEnumerator Loading()

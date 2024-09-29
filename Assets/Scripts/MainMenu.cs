@@ -38,14 +38,14 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        AdditionalFunctions.Instance.ObjectMovement(false, changeScreen, new Vector2(2000, 0), new Vector2(2000, 0), 2f, () => SoundManager.Instance.PlayClip(SoundManager.Instance.MusicSource, SoundManager.Instance.MusicCollection.clips[0], true));
+        AdditionalFunctions.Instance.ObjectMovement(false, changeScreen, new Vector2(2000, 0), new Vector2(2000, 0), 0.6f, () => SoundManager.Instance.PlayClip(SoundManager.Instance.MusicSource, SoundManager.Instance.MusicCollection.clips[0], true));
     }
 
     public void StartGame()
     {
         SoundManager.Instance.StopAll();
         SoundManager.Instance.PlayClip(SoundManager.Instance.MusicSource, SoundManager.Instance.MusicCollection.clips[1], true);
-        AdditionalFunctions.Instance.ObjectMovement(true, changeScreen, new Vector2(2000, 0), new Vector2(-2000, 0), 2f, () => SceneManager.LoadScene(gameScene));
+        AdditionalFunctions.Instance.ObjectMovement(true, changeScreen, new Vector2(2000, 0), new Vector2(-2000, 0), 0.6f, () => SceneManager.LoadScene(gameScene));
     }
 
     public void Settings()
