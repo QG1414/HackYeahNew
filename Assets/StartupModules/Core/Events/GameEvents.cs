@@ -70,5 +70,26 @@ namespace SteelLotus.Core.Events
                 OnGeneratorChange(generatorValueCurrent, generatorValueMax);
             }
         }
+
+
+        public event Action<DialogueOrder, int, int> OnDialogueChange;
+
+        public void CallOnDialogueChange(DialogueOrder order, int mainOrder, int secondOrder)
+        {
+            if (OnDialogueChange != null)
+            {
+                OnDialogueChange(order, mainOrder, secondOrder);
+            }
+        }
+
+        public event Action<DialogueOrder> OnDialogueEnd;
+
+        public void CallOnDialogueEnd(DialogueOrder order)
+        {
+            if (OnDialogueEnd != null)
+            {
+                OnDialogueEnd(order);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 using SteelLotus.Core;
 using SteelLotus.Core.Events;
+using SteelLotus.Sounds;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,6 +60,10 @@ public class HackingEventsInvoke : MonoBehaviour
         if(!win)
         {
             MainGameController.Instance.DecreaseHealth();
+        }
+        else
+        {
+            SoundManager.Instance.PlayOneShoot(SoundManager.Instance.AlertSource, SoundManager.Instance.AlertCollection.clips[2], 0.5f);
         }
 
         currentEvent = null;

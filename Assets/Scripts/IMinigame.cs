@@ -7,5 +7,6 @@ public interface IMinigame
 
 public enum MinigameType
 {
-    generator
+    generator,
+    fuses
 }

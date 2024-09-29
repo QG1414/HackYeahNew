@@ -80,17 +80,17 @@ public class Generator : InteractionObject, IMinigame
 
     private void UpdateMethod()
     {
-        currentWorkTime -= 1f;
+        currentWorkTime -= 1f * MainGameController.Instance.GeneratorMultiplaier;
 
         UpdateVisuals();
 
-        if(currentWorkTime / maxWorkTime < 0.2f && !warningActive)
+        if(currentWorkTime / maxWorkTime < 0.25f && !warningActive)
         {
             MainGameController.Instance.GeneratorCritical = true;
             warningActive = true;
             SoundManager.Instance.PlayClip(SoundManager.Instance.AlertSource, SoundManager.Instance.AlertCollection.clips[0], true);
         }
-        else if(currentWorkTime / maxWorkTime >= 0.2f && warningActive)
+        else if(currentWorkTime / maxWorkTime >= 0.25f && warningActive)
         {
             MainGameController.Instance.GeneratorCritical = false;
             warningActive = false;

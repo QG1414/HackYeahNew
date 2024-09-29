@@ -37,9 +37,16 @@ namespace SteelLotus.Core
         [SerializeField]
         private TimeController timeController;
 
+        [SerializeField]
+        private TutorialScript tutorials;
+
+
+        private float generatorMultiplaier = 1f;
+
         public bool GameStarted { get; set; }
 
         public bool GeneratorCritical { get; set; }
+        public float GeneratorMultiplaier { get => generatorMultiplaier; set => generatorMultiplaier = value; }
 
         private void Awake()
         {
@@ -52,7 +59,7 @@ namespace SteelLotus.Core
             dataManager.Init();
             SaveSystem.Init();
 
-            switchScenes.StopMovement(() => GameStarted = true);
+            switchScenes.StopMovement(() => tutorials.StartTutorial());
         }
 
         public T GetPropertyByType<T>() where T : class
@@ -90,6 +97,7 @@ namespace SteelLotus.Core
         public void DecreaseHealth()
         {
             healthController.UpdateHealth();
+            SoundManager.Instance.PlayOneShoot(SoundManager.Instance.AlertSource, SoundManager.Instance.AlertCollection.clips[3], 0.5f);
         }
 
 

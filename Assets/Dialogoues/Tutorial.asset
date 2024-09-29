@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51e73e829045a842a908e44016c47c5, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  talkingOption: 0
+  dialogue:
+  - It will be a hard night, we are beeing hacked
+  - There are a few things I need to remember
+  - Generator to the right needs to be powered from time to time using button
+  - I can take button from my left inventory and move it over the generator to start
+    a repair
+  - Sometimes hackers will attack my computer then I need to turn it on using pendrive
+    and block them off
+  - I think thats all I hope time displayed on the computer screen will go quickly

@@ -17,7 +17,11 @@ public class TimeVisualization : MonoBehaviour
     {
         timeController = MainGameController.Instance.GetPropertyByType<TimeController>();
         GameEvents.Instance.OnSecondUpdate += SecondUpdate;
-        timerPanel.text = (timeController.CurrentTime).ToString();
+
+        int hours = timeController.CurrentTime / 60;
+        int minutes = timeController.CurrentTime % 60;
+
+        timerPanel.text = string.Format("{0:00}:{1:00}", hours, minutes);
     }
 
     private void OnDestroy()
@@ -27,7 +31,9 @@ public class TimeVisualization : MonoBehaviour
 
     private void SecondUpdate()
     {
-        timerPanel.text = (timeController.CurrentTime).ToString();
+        int hours = timeController.CurrentTime / 60;
+        int minutes = timeController.CurrentTime % 60;
+        timerPanel.text = string.Format("{0:00}:{1:00}", hours, minutes);
     }
 
     public void DisableText()

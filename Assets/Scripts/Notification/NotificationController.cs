@@ -1,4 +1,5 @@
 using SteelLotus.Core;
+using SteelLotus.Core.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -113,7 +114,7 @@ public class NotificationController : MonoBehaviour
     private IEnumerator MoveInDialogoue(DialogueOrder order)
     {
         int elementIndexMain = 0;
-
+        int elementIndexSecond = 0;
         List<NotificationData> notificationElements = order.GetOrder();
 
         foreach (NotificationData notification in notificationElements)
@@ -123,9 +124,12 @@ public class NotificationController : MonoBehaviour
                 mainNotification.StartDialogue();
             }
 
+            elementIndexSecond = 0;
             foreach (string text in notification.Dialogue)
             {
                 mainNotification.ChangeText(text);
+
+                GameEvents.Instance.CallOnDialogueChange(order, elementIndexMain, elementIndexSecond);
 
                 while (!Input.anyKeyDown)
                 {
@@ -145,11 +149,13 @@ public class NotificationController : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(0.2f);
+                elementIndexSecond += 1;
             }
 
             elementIndexMain += 1;
         }
 
+        GameEvents.Instance.CallOnDialogueEnd(order);
         mainNotification.StopDialogue();
         MainGameController.Instance.BlockUnlockInteractions(false);
     }

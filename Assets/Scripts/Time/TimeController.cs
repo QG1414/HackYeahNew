@@ -9,10 +9,10 @@ public class TimeController : MonoBehaviour
     [SerializeField, Tooltip("add in seconds")]
     private int maxTime;
 
-    private float currentTime;
+    private int currentTime;
 
     public int MaxTime { get => maxTime; }
-    public float CurrentTime { get => currentTime; }
+    public int CurrentTime { get => currentTime; }
 
 
     private void Awake()
