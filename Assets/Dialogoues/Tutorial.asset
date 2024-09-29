@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkingOption: 0
   dialogue:
-  - It will be a hard night, we are beeing hacked
-  - There are a few things I need to remember
-  - Generator to the right needs to be powered from time to time using button
-  - I can take button from my left inventory and move it over the generator to start
-    a repair
-  - Sometimes hackers will attack my computer then I need to turn it on using pendrive
-    and block them off
-  - I think thats all I hope time displayed on the computer screen will go quickly
+  - Today is my first day as cyber guard of our city.
+  - I heard that fossas are doing a cyber attack.
+  - It is my duty to stop them.
+  - I have to remind myself of the most important rules.
+  - Generator is crucial without it city is in danger.
+  - To charge it I can use my special button.
+  - To use it I need to drag it and drop on generator.
+  - Sometimes fossas will attack my pc.
+  - In this case I need to turn it on with pendrive.
+  - I hope my three firewalls will be enaugh.
+  - Oh also my shift ends when clock on pc hits zero.
+  - I need to be on high alert enything can happen.

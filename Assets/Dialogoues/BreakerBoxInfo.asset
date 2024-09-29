@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b51e73e829045a842a908e44016c47c5, type: 3}
-  m_Name: MainTest2
+  m_Name: BreakerBoxInfo
   m_EditorClassIdentifier: 
   talkingOption: 0
   dialogue:
-  - elo lo
+  - I can fix breaker box with potetiometr.

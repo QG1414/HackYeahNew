@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkingOption: 0
   dialogue:
-  - I can't use this tool
+  - I can't use that tool on this element.

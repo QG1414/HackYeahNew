@@ -26,7 +26,7 @@ public class HackingEvent : MonoBehaviour
 
     public void StartMainScreen()
     {
-        currentTime = maxTime * 1000;
+        currentTime = (maxTime / 4f) * 1000;
         minigameCanvas.alpha = 1.0f;
         minigameCanvas.blocksRaycasts = true;
         minigameCanvas.interactable = true;

@@ -9,13 +9,23 @@ public class NotificationController : MonoBehaviour
     [SerializeField]
     private Notification mainNotification;
 
+    private SpritePlayerSwitcher spritePlayerSwitcher;
+
     public void Dialogue(DialogueOrder order, Notification otherNotification)
     {
+        if (spritePlayerSwitcher == null)
+            spritePlayerSwitcher = MainGameController.Instance.GetPropertyByType<SpritePlayerSwitcher>();
+
+        spritePlayerSwitcher.OnStartDialogoue();
         StartCoroutine(MoveInDialogoue(order, otherNotification));
     }
 
     public void Dialogue(DialogueOrder order)
     {
+        if (spritePlayerSwitcher == null)
+            spritePlayerSwitcher = MainGameController.Instance.GetPropertyByType<SpritePlayerSwitcher>();
+
+        spritePlayerSwitcher.OnStartDialogoue();
         StartCoroutine(MoveInDialogoue(order));
     }
 
@@ -105,6 +115,11 @@ public class NotificationController : MonoBehaviour
             }
         }
 
+        if (spritePlayerSwitcher == null)
+            spritePlayerSwitcher = MainGameController.Instance.GetPropertyByType<SpritePlayerSwitcher>();
+
+        spritePlayerSwitcher.OnStartIdle();
+
         otherNotification.StopDialogue();
         mainNotification.StopDialogue();
         MainGameController.Instance.BlockUnlockInteractions(false);
@@ -154,6 +169,11 @@ public class NotificationController : MonoBehaviour
 
             elementIndexMain += 1;
         }
+
+        if (spritePlayerSwitcher == null)
+            spritePlayerSwitcher = MainGameController.Instance.GetPropertyByType<SpritePlayerSwitcher>();
+
+        spritePlayerSwitcher.OnStartIdle();
 
         GameEvents.Instance.CallOnDialogueEnd(order);
         mainNotification.StopDialogue();

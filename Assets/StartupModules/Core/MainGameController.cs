@@ -46,6 +46,9 @@ namespace SteelLotus.Core
         [SerializeField]
         private ScenesManager sceneMenager;
 
+        [SerializeField]
+        private SpritePlayerSwitcher spriteSwitcher;
+
 
         private float generatorMultiplaier = 1f;
 
